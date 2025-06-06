@@ -1,8 +1,6 @@
 #!/bin/bash
 
 [ -e $PWD/src/main.cpp ]
-[ -x $PWD/build/dospt ]
-
 if [[ $# -eq 0 ]]
 then
 	if ! command -v g++ &> /dev/null 

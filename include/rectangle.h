@@ -2,7 +2,7 @@
 #define RECTANGLE_H
 
 #include <iostream>
-#include "Shape.h"
+#include "libshapes.h"
 
 template <class R>
 class Rectangle : public Shape<R>, public modShape

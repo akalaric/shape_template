@@ -1,5 +1,5 @@
-#ifndef SHAPE_H
-#define SHAPE_H
+#ifndef LIBSHAPES_H
+#define LIBSHAPES_H
 
 #include <memory>
 #include <tuple>
@@ -57,4 +57,4 @@ public:
 
 int modShape::count = 0;
 
-#endif // SHAPE_H
+#endif // LIBSHAPES_H

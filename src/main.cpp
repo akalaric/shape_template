@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/Shape.h"
+#include "../include/libshapes.h"
 #include "../include/include.h"
 
 int main()

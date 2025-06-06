@@ -2,7 +2,7 @@
 #define SQUARE_H
 
 #include <iostream>
-#include "Shape.h"
+#include "libshapes.h"
 
 template <class Sq>
 class Square : public Shape<Sq>, public modShape

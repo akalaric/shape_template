@@ -2,7 +2,7 @@
 #define SPHERE_H
 
 #include <iostream>
-#include "Shape.h"
+#include "libshapes.h"
 
 namespace sphere_constants
 {

@@ -2,7 +2,7 @@
 #define TRIANGLE_H
 
 #include <iostream>
-#include "Shape.h"
+#include "libshapes.h"
 
 template <class T>
 class Triangle : public Shape<T>, public modShape
