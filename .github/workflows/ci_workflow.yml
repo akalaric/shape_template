@@ -1,24 +1,26 @@
-name: CI
-on: 
+name: shape_template CI
+
+on:
   push:
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Run script
         run: |
-          { ./run_shapes.sh > ./build/run.log 2>&1 || { echo "Script failed" && exit 1; }; }  
+          mkdir -p build
+          { ./run_shapes.sh > ./build/run.log 2>&1 || { echo "Script failed" && exit 1; }; }
           cat ./build/run.log
-      - name: upload-run-log-file
+
+      - name: Upload run log file
         uses: actions/upload-artifact@v4
         with:
           name: run-log-file
           path: build/run.log
+
       - name: Upload log file on failure
         if: failure()
         uses: actions/upload-artifact@v4
@@ -26,17 +28,32 @@ jobs:
           name: script-log-file
           path: ./build/f_script.log
 
+  make:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt-get update && sudo apt-get install -y g++
+
+      - name: Run Makefile (make all)
+        run: make all
+
   docker:
-      runs-on: ubuntu-latest
-      steps: 
-        - uses: actions/checkout@v4
-        - name: Docker image
-          run: |
-            { ./run_shapes.sh Docker || { echo "Script failed" && exit 1; }; }
-        - name: Upload log file on failure
-          if: failure()
-          uses: actions/upload-artifact@v4 
-          with:
-            name: docker-log-file
-            path: ./build/f_docker.log
-        
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Docker build/test
+        run: |
+          mkdir -p build
+          { ./run_shapes.sh Docker > ./build/docker.log 2>&1 || { echo "Script failed" && exit 1; }; }
+          cat ./build/docker.log
+
+      - name: Upload log file on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-log-file
+          path: ./build/f_docker.log
