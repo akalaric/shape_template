@@ -1,13 +1,21 @@
 TARGET = shapes
 SRC = src/main.cpp
+SRC_SCRIPT = run_shapes.sh
 
-all: run clean
+all: build test_cli test_int clean
 
-run:
+build:
 	g++ $(SRC) -o $(TARGET)
-	./$(TARGET)
+
+test_cli: build
+	./$(TARGET) circle 5
+	./$(TARGET) rectangle 2 4 
+	./$(TARGET) triangle 8 6 6
+
+test_int: build
+	./$(SRC_SCRIPT)
 
 clean:
 	rm -f $(TARGET)
 
-.PHONY: run clean all
+.PHONY: run clean all build
