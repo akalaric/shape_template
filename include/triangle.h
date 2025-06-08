@@ -8,6 +8,7 @@ template <class T>
 class Triangle : public Shape<T>, public modShape
 {
 private:
+    // 3 sides are taken to calculate the perimeter
     // Tuple to store the three sides of the triangle
     std::tuple<std::shared_ptr<T>, std::shared_ptr<T>, std::shared_ptr<T>> sides;
 

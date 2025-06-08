@@ -11,7 +11,7 @@ template <class C>
 class Circle : public Shape<C>, public modShape
 {
 private:
-    std::string name = "Circle";
+    std::string shape_name = "Circle";
     std::shared_ptr<C> radius;
     C scaleFactor, effectiveRadius;
 
@@ -25,7 +25,7 @@ public:
     }
     double scaleShape() const override
     {
-        double effectiveScaleFactor = validateScaleFactor(scaleFactor, name);
+        double effectiveScaleFactor = validateScaleFactor(scaleFactor, shape_name);
         return (*radius) * effectiveScaleFactor;
     }
     C area() const override
