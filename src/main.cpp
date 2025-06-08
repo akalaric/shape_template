@@ -1,37 +1,29 @@
-#include <iostream>
-#include "../include/libshapes.h"
-#include "../include/include.h"
+#include "input_handler.cpp"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::vector<std::unique_ptr<Shape<double>>> shapes;
-    try
+    if (argc > 1)
     {
-        shapes.push_back(std::make_unique<Circle<double>>(4, 500));
+        std::ostringstream oss;
+        for (int i = 1; i < argc; ++i)
+        {
+            oss << argv[i] << " ";
+        }
+        std::string command = oss.str();
+        process_input(command);
     }
-    catch (const std::invalid_argument &e)
+    else
     {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-    try
-    {
-        shapes.push_back(std::make_unique<Circle<double>>(4, 5));
-        shapes.push_back(std::make_unique<Rectangle<double>>(4.5, 8.5));
-        shapes.push_back(std::make_unique<Square<double>>(5.0));
-        shapes.push_back(std::make_unique<Sphere<double>>(6.2));
-        shapes.push_back(std::make_unique<Circle<double>>(5.5, 5));
-        shapes.push_back(std::make_unique<Circle<double>>(4));
-        shapes.push_back(std::make_unique<Circle<double>>(2, 35));
-    }
-    catch (const std::invalid_argument &e)
-    {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
+        while (true)
+        {
+            std::cout << "Enter shape (or 'exit'): ";
+            std::string line;
+            std::getline(std::cin, line);
 
-    for (std::size_t i = 0; i < shapes.size(); i++)
-    {
-        shapes[i]->display();
+            if (line == "exit" || line == "q")
+                break;
+            process_input(line);
+        }
     }
-
-    std::cout << "Total Shapes created: " << modShape::getShapeCount() << std::endl;
+    return 0;
 }
