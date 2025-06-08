@@ -8,23 +8,10 @@ then
 		echo "Error: g++ is not installed."
 		exit 1
 	else
-		g++ $PWD/src/main.cpp -o ShapeTemplate
-		./ShapeTemplate
-		rm ShapeTemplate
+		g++ $PWD/src/main.cpp -o shapes
+		echo -e "circle 5\n rectangle 5 8\n square 8\nexit" | ./shapes  
+		rm shapes
 	fi
 fi	
 
-if [[ $1 == Docker ]]
-then	
-	if ! which docker &> /dev/null
-	then
-		echo "Docker not installed"
-	else
-		docker build . --file Dockerfile --tag image:ci_workflow || { echo "Failed to run image"; exit 1; }
-		docker run --rm image:ci_workflow || { echo "Failed to run image"; exit 1; }
-	fi
-elif [[ $# -ne 0 ]]
-then
-	echo "Wrong argument"
-fi
 

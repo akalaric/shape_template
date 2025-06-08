@@ -1,4 +1,4 @@
-#include "input_handler.cpp"
+#include "input_handler.h"
 
 int main(int argc, char *argv[])
 {

@@ -15,6 +15,10 @@ private:
 public:
     Triangle(T S1, T S2, T S3)
     {
+        if ((S1 + S2 <= S3) || (S2 + S3 <= S1) || (S3 + S1 <= S2))
+        {
+            throw std::invalid_argument("Triangle inequality violated: invalid triangle.");
+        }
         sides = std::make_tuple(std::make_shared<T>(S1), std::make_shared<T>(S2), std::make_shared<T>(S3));
         modShape::count++;
     }

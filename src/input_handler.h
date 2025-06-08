@@ -1,26 +1,25 @@
+#ifndef INPUT_HANDLER_H
+#define INPUT_HANDLER_H
+
 #include <iostream>
 #include <sstream>
+#include <cassert>
+#include <cassert>
 #include "../include/libshapes.h"
 #include "../include/include.h"
 
 template <typename option>
 void make_shape(std::shared_ptr<option> &input_shape)
 {
-    std::vector<std::shared_ptr<Shape<double>>> shapes;
     try
     {
-        shapes.push_back(input_shape);
+        input_shape->display();
+        std::cout << "Total Shapes created: " << modShape::getShapeCount() << std::endl;
     }
     catch (const std::invalid_argument &e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
     }
-
-    for (const auto &shape : shapes)
-    {
-        shape->display();
-    }
-    std::cout << "Total Shapes created: " << modShape::getShapeCount() << std::endl;
 }
 
 void process_input(const std::string &line)
@@ -34,6 +33,7 @@ void process_input(const std::string &line)
         double r;
         if (iss >> r)
         {
+            assert(r > 0);
             auto circle = std::make_shared<Circle<double>>(r);
             make_shape(circle);
         }
@@ -47,6 +47,7 @@ void process_input(const std::string &line)
         double l, b;
         if (iss >> l >> b)
         {
+            assert(l > 0 && b > 0);
             auto rectangle = std::make_shared<Rectangle<double>>(l, b);
             make_shape(rectangle);
         }
@@ -60,6 +61,7 @@ void process_input(const std::string &line)
         double s;
         if (iss >> s)
         {
+            assert(s > 0);
             auto square = std::make_shared<Square<double>>(s);
             make_shape(square);
         }
@@ -73,6 +75,7 @@ void process_input(const std::string &line)
         double r;
         if (iss >> r)
         {
+             assert(r > 0);
             auto sphere = std::make_shared<Sphere<double>>(r);
             make_shape(sphere);
         }
@@ -86,6 +89,7 @@ void process_input(const std::string &line)
         double hypotenuse, adjacent, opposite;
         if (iss >> hypotenuse >> adjacent >> opposite)
         {
+            assert(hypotenuse > 0 && adjacent > 0 && opposite > 0);
             auto triangle = std::make_shared<Triangle<double>>(hypotenuse, adjacent, opposite);
             make_shape(triangle);
         }
@@ -104,3 +108,5 @@ void process_input(const std::string &line)
                   << "       triangle <hypotenuse> <adjacent> <opposite>\n";
     }
 }
+
+#endif // INPUT_HANDLER_H
