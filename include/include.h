@@ -5,3 +5,4 @@
 #include "rectangle.h"
 #include "square.h"
 #include "sphere.h"
+#include "cube.h"
