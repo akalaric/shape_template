@@ -24,12 +24,12 @@ public:
     }
     Sp area() const override;
     Sp perimeter() const override;
-    Sp Volume() const override;
+    Sp volume() const override;
     void display() const override;
 };
 
 template <class Sp>
-Sp Sphere<Sp>::Volume() const 
+Sp Sphere<Sp>::volume() const 
 {
     return (*sphere_constants::val) * (*sphere_constants::pi) * pow((*radius[0]), 3);
 }
@@ -48,7 +48,7 @@ Sp Sphere<Sp>::perimeter() const
 template <class Sp>
 void Sphere<Sp>::display() const
 {
-    std::cout << "Sphere: radius = (" << *radius[0] << ")" << ", area = " << area() << ", perimeter = " << perimeter() << ", Volume = " << Volume()  << std::endl;
+    std::cout << "Sphere: radius = (" << *radius[0] << ")" << ", area = " << area() << ", perimeter = " << perimeter() << ", volume = " << volume()  << std::endl;
 }
 
 #endif // SPHERE_H

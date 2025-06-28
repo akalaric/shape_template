@@ -13,7 +13,7 @@ class Shape
 public:
     virtual S area() const = 0;
     virtual S perimeter() const = 0;
-    virtual S Volume() const
+    virtual S volume() const
     {
         return static_cast<S>(0); // Default behavior for 2D shapes
     }
