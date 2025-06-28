@@ -33,13 +33,33 @@ void process_input(const std::string &line)
         double r;
         if (iss >> r)
         {
-            assert(r > 0);
-            auto circle = std::make_shared<Circle<double>>(r);
-            make_shape(circle);
+            if (r <= 0)
+            {
+                std::cerr << "Error: radius must be positive.\n";
+                return;
+            }
+            std::string keyword;
+            double scale;
+            if (iss >> keyword >> scale && keyword == "scale")
+            {
+                if (scale <= 0)
+                {
+                    std::cerr << "Error: scale factor must be positive.\n";
+                    return;
+                }
+
+                auto circle = std::make_shared<Circle<double>>(r, scale);
+                make_shape(circle);
+            }
+            else
+            {
+                auto circle = std::make_shared<Circle<double>>(r);
+                make_shape(circle);
+            }
         }
         else
         {
-            std::cerr << "Usage: circle <radius>\n";
+            std::cerr << "Usage: circle <radius> [scale <factor>]\n";
         }
     }
     else if (shape == "rectangle")
@@ -70,12 +90,46 @@ void process_input(const std::string &line)
             std::cerr << "Usage: square <side>\n";
         }
     }
+    else if (shape == "cube")
+    {
+        double r;
+        if (iss >> r)
+        {
+            if (r <= 0)
+            {
+                std::cerr << "Error: side must be positive.\n";
+                return;
+            }
+            std::string keyword;
+            double scale;
+            if (iss >> keyword >> scale && keyword == "scale")
+            {
+                if (scale <= 0)
+                {
+                    std::cerr << "Error: scale factor must be positive.\n";
+                    return;
+                }
+
+                auto cube = std::make_shared<Cube<double>>(r, scale);
+                make_shape(cube);
+            }
+            else
+            {
+                auto cube = std::make_shared<Cube<double>>(r);
+                make_shape(cube);
+            }
+        }
+        else
+        {
+            std::cerr << "Usage: circle <radius> [scale <factor>]\n";
+        }
+    }
     else if (shape == "sphere")
     {
         double r;
         if (iss >> r)
         {
-             assert(r > 0);
+            assert(r > 0);
             auto sphere = std::make_shared<Sphere<double>>(r);
             make_shape(sphere);
         }
@@ -104,6 +158,7 @@ void process_input(const std::string &line)
                   << "       circle <radius>\n"
                   << "       rectangle <length> <breadth>\n"
                   << "       square <side>\n"
+                  << "       cube <side>\n"
                   << "       sphere <radius>\n"
                   << "       triangle <hypotenuse> <adjacent> <opposite>\n";
     }

@@ -30,12 +30,16 @@ protected:
     double validateScaleFactor(double scaleFactor, std::string shape_name) const
     {
         if (scaleFactor < 0)
-            return 1;
+            return 1.0;
 
-        if (scaleFactor > 100)
-            throw std::invalid_argument("Shape: " + shape_name + "\n  High scaling factor: " + std::to_string(scaleFactor));
-
-        return scaleFactor;
+        else if (scaleFactor > 100)
+        {
+            std::cerr << "Shape: " + shape_name + "\n  High scaling factor: " + std::to_string(scaleFactor) << std::endl;    
+            // throw std::invalid_argument("Shape: " + shape_name + "\n  High scaling factor: " + std::to_string(scaleFactor));
+            return 1.0;
+        }
+        else
+            return scaleFactor;
     }
 
 public:
@@ -50,6 +54,8 @@ public:
     friend class Square;
     template <class Sp>
     friend class Sphere;
+    template <class cb>
+    friend class Cube;
     virtual double scaleShape() const
     {
         return 1.0;
