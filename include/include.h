@@ -1,3 +1,5 @@
+// Central header to include all shape definitions
+
 #pragma once
 
 #include "circle.h"

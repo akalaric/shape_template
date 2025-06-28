@@ -121,7 +121,7 @@ void process_input(const std::string &line)
         }
         else
         {
-            std::cerr << "Usage: circle <radius> [scale <factor>]\n";
+            std::cerr << "Usage: cube <radius> [scale <factor>]\n";
         }
     }
     else if (shape == "sphere")

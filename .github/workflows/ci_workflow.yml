@@ -20,6 +20,7 @@ jobs:
           set -e  # exit immediately on error
           docker build . --file Dockerfile --tag ci_workflow > ./build/docker.log 2>&1
           docker run --rm ci_workflow circle 10
+          docker run --rm ci_workflow cube 10 scale 4
       
       - name: Upload log file on failure
         if: failure()

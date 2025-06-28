@@ -9,7 +9,7 @@ then
 		exit 1
 	else
 		g++ $PWD/src/main.cpp -o shapes
-		echo -e "circle 5\n rectangle 5 8\n square 8\nexit" | ./shapes  
+		echo -e "circle 5\n rectangle 5 8\n circle 5 scale 8\n square 8\nexit" | ./shapes  
 		rm shapes
 	fi
 fi	

@@ -12,8 +12,11 @@ run: build
 
 test_cli: build
 	./$(TARGET) circle 5
+	./$(TARGET) circle 5 scale 45
 	./$(TARGET) rectangle 2 4 
 	./$(TARGET) triangle 4 2 5
+	./$(TARGET) sphere 4
+	./$(TARGET) cube 12
 
 test_int: build
 	./$(SRC_SCRIPT)
